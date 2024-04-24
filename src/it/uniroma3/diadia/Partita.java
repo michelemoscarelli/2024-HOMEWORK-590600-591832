@@ -39,7 +39,7 @@ public class Partita {
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
-		return finita || vinta() || (this.giocatore.getCfu() == 0);
+		return finita || vinta() || giocatoreIsVivo();
 	}
 
 	/**
@@ -56,5 +56,9 @@ public class Partita {
 
 	public Labirinto getLabirinto() {
 		return labirinto;
+	}
+
+	public boolean giocatoreIsVivo() {
+		return this.giocatore.getCfu() == 0;
 	}
 }
