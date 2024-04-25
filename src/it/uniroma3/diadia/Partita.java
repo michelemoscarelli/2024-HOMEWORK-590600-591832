@@ -14,7 +14,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class Partita {
 
-	private Stanza stanzaVincente;
+
 	private boolean finita;
 	private Labirinto labirinto;
 	private Giocatore giocatore;
@@ -59,6 +59,6 @@ public class Partita {
 	}
 
 	public boolean giocatoreIsVivo() {
-		return this.giocatore.getCfu() == 0;
+		return this.giocatore.getCfu() != 0;
 	}
 }
