@@ -1,6 +1,6 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 /**
@@ -9,13 +9,13 @@ import it.uniroma3.diadia.Partita;
 public class ComandoAiuto implements Comando{
 	
 	static final private String[] elencoComandi = {"vai", "borsa", "prendi", "posa", "guarda", "aiuto", "fine"};
-	private IOConsole ioConsole;
+	private IO io;
 	
 	@Override
 	public void esegui(Partita partita) {
 		for(int i=0; i< elencoComandi.length; i++) 
-			this.ioConsole.mostraMessaggio(elencoComandi[i]+" ");
-		this.ioConsole.mostraMessaggio("");
+			this.io.mostraMessaggio(elencoComandi[i]+" ");
+		this.io.mostraMessaggio("");
 		
 	}
 

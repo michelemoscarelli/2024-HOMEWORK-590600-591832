@@ -1,16 +1,16 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoGuarda implements Comando{
 	
-	private IOConsole ioConsole;
+	private IO io;
 
 	@Override
 	public void esegui(Partita partita) {
-		this.ioConsole.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().toString());
-		this.ioConsole.mostraMessaggio("ed hai: " + partita.getGiocatore().getCfu());
+		this.io.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().toString());
+		this.io.mostraMessaggio("ed hai: " + partita.getGiocatore().getCfu());
 		
 	}
 

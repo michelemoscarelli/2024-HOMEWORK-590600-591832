@@ -1,13 +1,13 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPosa implements Comando{
 	
 	private String nomeAttrezzo;
-	private IOConsole ioConsole;
+	private IO io;
 	
 	
 	
@@ -16,7 +16,7 @@ public class ComandoPosa implements Comando{
 		
 		/* il nome dell'attrezzo è null, stampa messaggio di errore e ritorna */
 		if (nomeAttrezzo==null) {
-			this.ioConsole.mostraMessaggio("Parametro non valido");
+			this.io.mostraMessaggio("Parametro non valido");
 			return;
 		}
 		
@@ -34,23 +34,23 @@ public class ComandoPosa implements Comando{
 			
 			/* stanza è piena */
 			if ( !(posato_in_stanza) ) {
-				this.ioConsole.mostraMessaggio("Impossibile posare l'attrezzo"+" "+nomeAttrezzo+":"+" "+"stanza piena.");
+				this.io.mostraMessaggio("Impossibile posare l'attrezzo"+" "+nomeAttrezzo+":"+" "+"stanza piena.");
 				return;
 			}
 			
 			/* stanza non è piena: attrezzo posato */
-			this.ioConsole.mostraMessaggio("Attrezzo"+" "+nomeAttrezzo+" "+"posato.");
+			this.io.mostraMessaggio("Attrezzo"+" "+nomeAttrezzo+" "+"posato.");
 			
 			/* toglilo dalla borsa */
 			/* se removeAttrezzo non restituisce l'elemento eliminato, stampa messaggio di errore,
 			 * altrimenti l'elemento è rimosso da borsa */
 			if ( partita.getGiocatore().getBorsa().removeAttrezzo(attrezzo_da_posare.getNome())==null ) {
-				this.ioConsole.mostraMessaggio("Errore: rimozione di"+" "+nomeAttrezzo+" "+" da borsa non riuscita.");
+				this.io.mostraMessaggio("Errore: rimozione di"+" "+nomeAttrezzo+" "+" da borsa non riuscita.");
 			}
 			return;
 		}
 		/* non esiste, stampa messaggio di errore e ritorna */
-		this.ioConsole.mostraMessaggio("Attrezzo non trovato in borsa.");
+		this.io.mostraMessaggio("Attrezzo non trovato in borsa.");
 		return;
 		
 	}

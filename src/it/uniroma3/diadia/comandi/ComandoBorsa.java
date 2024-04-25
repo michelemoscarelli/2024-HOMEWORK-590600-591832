@@ -1,14 +1,14 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoBorsa implements Comando{
-	private IOConsole ioConsole;
+	private IO io;
 
 	@Override
 	public void esegui(Partita partita) {
-		this.ioConsole.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
+		this.io.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
 	}
 
 	@Override
