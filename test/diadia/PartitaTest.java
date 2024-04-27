@@ -7,10 +7,11 @@ import org.junit.Test;
 import it.uniroma3.diadia.Partita;
 
 public class PartitaTest {
-	private Partita partita = new Partita();
+	private Partita partita;
 	
 	@Before
 	public void setUp() {
+		partita = new Partita();
 	}
 	
 	/* test isFinita */
