@@ -28,15 +28,13 @@ public class ComandoAiuto implements Comando{
 	}
 
 	@Override
-	public void getNome() {
-		// TODO Auto-generated method stub
-		
+	public String getNome() {
+		return "aiuto";
 	}
 
 	@Override
-	public void getParametro() {
-		// TODO Auto-generated method stub
-		
+	public String getParametro() {
+		return null;
 	}
 
 

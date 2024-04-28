@@ -26,9 +26,8 @@ public class ComandoNonValido implements Comando{
 	}
 
 	@Override
-	public void getParametro() {
-		// TODO Auto-generated method stub
-		
+	public String getParametro() {
+		return null;	
 	}
 
 }

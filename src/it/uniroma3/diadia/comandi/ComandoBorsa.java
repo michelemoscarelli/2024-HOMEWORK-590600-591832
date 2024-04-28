@@ -24,9 +24,8 @@ public class ComandoBorsa implements Comando{
 	}
 
 	@Override
-	public void getParametro() {
-		// TODO Auto-generated method stub
-		
+	public String getParametro() {
+		return null;
 	}
 
 }
