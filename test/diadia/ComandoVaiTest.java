@@ -24,7 +24,7 @@ public class ComandoVaiTest {
 		this.io = new IOConsole();
 		this.comandovai = new ComandoVai();
 		this.partita = new Partita();
-		this.comandovai.setIO(io);
+		this.comandovai.setIO(this.io);
 		this.primastanza = this.partita.getLabirinto().getStanzaCorrente();
 	}
 
@@ -32,14 +32,14 @@ public class ComandoVaiTest {
 	@Test
 	public void testEsegui_ParametroValido() {
 		this.comandovai.setParametro("sud");
-		this.comandovai.esegui(partita);
+		this.comandovai.esegui(this.partita);
 		assertEquals(this.primastanza,this.partita.getLabirinto().getStanzaCorrente().getStanzaAdiacente("nord"));
 	}
 	
 	@Test
 	public void testEsegui_ParametroNonValidoNullo() {
 		this.comandovai.setParametro("pippo");
-		this.comandovai.esegui(partita);
+		this.comandovai.esegui(this.partita);
 		assertEquals(this.primastanza,this.partita.getLabirinto().getStanzaCorrente());
 	}
 	

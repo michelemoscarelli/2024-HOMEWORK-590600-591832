@@ -26,7 +26,7 @@ public class ComandoPosaTest {
 		this.partita = new Partita();
 		this.attrezzo = new Attrezzo("attrezzo_qualunque",2);
 		this.pesante = new Attrezzo("attrezzo_pesante",10);
-		this.comandoposa.setIO(io);
+		this.comandoposa.setIO(this.io);
 	}
 
 	/* test esegui */
@@ -36,7 +36,7 @@ public class ComandoPosaTest {
 	public void testEsegui_AttrezzoNonEsiste() {
 			
 		this.comandoposa.setParametro("attrezzo_qualunque");
-		this.comandoposa.esegui(partita);
+		this.comandoposa.esegui(this.partita);
 		assertFalse(this.partita.getLabirinto().getStanzaCorrente().hasAttrezzo("attrezzo_qualunque"));
 	}
 	
@@ -45,18 +45,18 @@ public class ComandoPosaTest {
 		//aggiunge attrezzo alla borsa
 		for (int i=0; i<10; i++)		// 10 è il numero massimo di attrezzi contenibili in Stanza
 			this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.pesante);
-		this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
+		this.partita.getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
 		this.comandoposa.setParametro("attrezzo_qualunque");
-		this.comandoposa.esegui(partita);
+		this.comandoposa.esegui(this.partita);
 		assertFalse(this.partita.getLabirinto().getStanzaCorrente().hasAttrezzo("attrezzo_qualunque"));
 	}
 	
 	@Test
 	public void testEsegui_AttrezzoPosato() {
 		//aggiunge attrezzo alla borsa
-		this.partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
+		this.partita.getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
 		this.comandoposa.setParametro("attrezzo_qualunque");
-		this.comandoposa.esegui(partita);
+		this.comandoposa.esegui(this.partita);
 		assertEquals(attrezzo,this.partita.getLabirinto().getStanzaCorrente().getAttrezzo("attrezzo_qualunque"));
 	}
 	
