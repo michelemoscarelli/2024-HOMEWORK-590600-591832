@@ -20,7 +20,8 @@ public class ComandoNonValido implements Comando{
 	}
 
 	@Override
-	public void getNome() {
+	public String getNome() {
+		return "ComandoNonValido";
 		// TODO Auto-generated method stub
 		
 	}
@@ -28,6 +29,12 @@ public class ComandoNonValido implements Comando{
 	@Override
 	public String getParametro() {
 		return null;	
+	}
+	
+	@Override
+	public void setIO(IO io) {
+		this.io= io;
+		
 	}
 
 }

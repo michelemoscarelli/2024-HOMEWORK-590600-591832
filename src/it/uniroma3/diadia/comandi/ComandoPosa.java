@@ -62,14 +62,20 @@ public class ComandoPosa implements Comando{
 	}
 
 	@Override
-	public void getNome() {
-		// TODO Auto-generated method stub
+	public String getNome() {
+		return "Posa";
 		
 	}
 
 	@Override
 	public String getParametro() {
 		return this.nomeAttrezzo;
+	}
+	
+	@Override
+	public void setIO(IO io) {
+		this.io= io;
+		
 	}
 	
 

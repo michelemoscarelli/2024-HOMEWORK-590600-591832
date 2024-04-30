@@ -39,7 +39,7 @@ public class Partita {
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
-		return finita || vinta() || giocatoreIsVivo();
+		return finita || vinta() || !giocatoreIsVivo();
 	}
 
 	/**

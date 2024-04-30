@@ -56,7 +56,7 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
-		FabbricaDiComandiFisarmonica  factory = new FabbricaDiComandiFisarmonica ();
+		FabbricaDiComandiFisarmonica  factory = new FabbricaDiComandiFisarmonica (this.io);
 		
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita); 

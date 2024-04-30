@@ -50,7 +50,8 @@ public class ComandoVai implements Comando{
 
 
 	@Override
-	public void getNome() {
+	public String getNome() {
+		return "vai";
 		// TODO Auto-generated method stub
 
 	}
@@ -59,6 +60,12 @@ public class ComandoVai implements Comando{
 	@Override
 	public String getParametro() {
 		return this.direzione;
+	}
+	
+	@Override
+	public void setIO(IO io) {
+		this.io= io;
+		
 	}
 
 

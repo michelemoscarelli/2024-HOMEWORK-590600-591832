@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.ComandoPrendi;
@@ -14,34 +16,45 @@ public class ComandoPrendiTest {
 	private ComandoPrendi comandoprendi;
 	private Partita partita;
 	private Attrezzo attrezzo;
+	private IO io;
+	private Attrezzo pesante;
 
 	@Before
 	public void setUp() throws Exception {
+		this.io = new IOConsole();
 		this.comandoprendi = new ComandoPrendi();
 		this.partita = new Partita();
 		this.attrezzo = new Attrezzo("attrezzo_qualunque",2);
+		this.pesante = new Attrezzo("attrezzo_pesante",10);
+		this.comandoprendi.setIO(io);
 	}
 
 	/* test esegui */
-	@Test
-	public void testEsegui_AttrezzoNull() {
-		//assertSame("Parametro non valido", );
-	}
 	
 	@Test
 	public void testEsegui_AttrezzoNonEsiste() {
-			
-		fail("Not yet implemented");
+		this.comandoprendi.setParametro("attrezzo_qualunque");
+		this.comandoprendi.esegui(partita);
+		assertFalse(this.partita.getLabirinto().getStanzaCorrente().hasAttrezzo("attrezzo_qualunque"));
 	}
 	
 	@Test
 	public void testEsegui_AttrezzoEsisteMaBorsaIsPiena() {
-		fail("Not yet implemented");
+		//aggiunge attrezzo ad una stanza
+		this.partita.getGiocatore().getBorsa().addAttrezzo(pesante);
+		this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(attrezzo);
+		this.comandoprendi.setParametro("attrezzo_qualunque");
+		this.comandoprendi.esegui(partita);
+		assertFalse(this.partita.getGiocatore().getBorsa().hasAttrezzo("attrezzo_qualunque"));
 	}
 	
 	@Test
 	public void testEsegui_AttrezzoPreso() {
-		fail("Not yet implemented");
+		//aggiunge attrezzo ad una stanza
+		this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(attrezzo);
+		this.comandoprendi.setParametro("attrezzo_qualunque");
+		this.comandoprendi.esegui(partita);
+		assertEquals(attrezzo,this.partita.getGiocatore().getBorsa().getAttrezzo("attrezzo_qualunque"));
 	}
 	
 	

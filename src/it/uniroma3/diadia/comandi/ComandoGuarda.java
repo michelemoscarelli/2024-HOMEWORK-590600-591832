@@ -21,14 +21,20 @@ public class ComandoGuarda implements Comando{
 	}
 
 	@Override
-	public void getNome() {
-		// TODO Auto-generated method stub
+	public String getNome() {
+		return "Guarda";
 		
 	}
 
 	@Override
 	public String getParametro() {
 		return null;
+	}
+	
+	@Override
+	public void setIO(IO io) {
+		this.io= io;
+		
 	}
 
 }

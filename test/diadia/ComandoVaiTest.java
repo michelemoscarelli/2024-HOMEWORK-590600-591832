@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.ComandoPrendi;
 import it.uniroma3.diadia.comandi.ComandoVai;
@@ -13,28 +16,33 @@ import it.uniroma3.diadia.comandi.ComandoVai;
 public class ComandoVaiTest {
 	private ComandoVai comandovai;
 	private Partita partita;
+	private Stanza primastanza;
+	private IO io;
 
 	@Before
 	public void setUp() throws Exception {
+		this.io = new IOConsole();
 		this.comandovai = new ComandoVai();
 		this.partita = new Partita();
+		this.comandovai.setIO(io);
+		this.primastanza = this.partita.getLabirinto().getStanzaCorrente();
 	}
 
 	/* test esegui */
 	@Test
 	public void testEsegui_ParametroValido() {
-		fail("Not yet implemented");
+		this.comandovai.setParametro("sud");
+		this.comandovai.esegui(partita);
+		assertEquals(this.primastanza,this.partita.getLabirinto().getStanzaCorrente().getStanzaAdiacente("nord"));
 	}
 	
 	@Test
-	public void testEsegui_ParametroNonValido() {
-		fail("Not yet implemented");
+	public void testEsegui_ParametroNonValidoNullo() {
+		this.comandovai.setParametro("pippo");
+		this.comandovai.esegui(partita);
+		assertEquals(this.primastanza,this.partita.getLabirinto().getStanzaCorrente());
 	}
 	
-	@Test
-	public void testEsegui_ParametroNullo() {
-		fail("Not yet implemented");
-	}
 	
 	/* test setParametro */
 	@Test
