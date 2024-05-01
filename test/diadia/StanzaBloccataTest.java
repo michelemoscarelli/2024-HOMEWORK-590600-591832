@@ -13,6 +13,7 @@ public class StanzaBloccataTest {
 	
 	Stanza bagno;
 	Stanza cucina;
+	Stanza sgabuzzino;
 	private Attrezzo chiave;
 
 	@Before
@@ -20,8 +21,11 @@ public class StanzaBloccataTest {
 		this.chiave = new  Attrezzo("chiave", 2);
 		this.cucina = new Stanza("cucina");
 		this.bagno = new StanzaBloccata("bagno","nord", "chiave");
-		bagno.impostaStanzaAdiacente("nord",cucina);
-
+		this.sgabuzzino = new Stanza("sgabuzzino");
+		this.bagno.impostaStanzaAdiacente("nord",cucina);
+		this.bagno.impostaStanzaAdiacente("est",sgabuzzino);
+		this.sgabuzzino.impostaStanzaAdiacente("ovest", bagno);
+		this.cucina.impostaStanzaAdiacente("sud",bagno);
 	}
 
 	@Test
@@ -32,7 +36,7 @@ public class StanzaBloccataTest {
 	
 	@Test
 	public void testgetDescrizione_StanzaSenzaChiave() {
-		assertEquals("Stanza bloccata nella direzione: "+ "nord"+"\nPrendi il " + "chiave" + " e posalo nella stanza",this.bagno.getDescrizione());
+		assertEquals("Stanza bloccata nella direzione: "+ "nord"+"\nPrendi l'attrezzo " + "chiave" + " e posalo nella stanza",this.bagno.getDescrizione());
 		
 	}
 	@Test
@@ -42,7 +46,11 @@ public class StanzaBloccataTest {
 	}
 	
 	@Test
-	public void testgetStanzaAdiacente_Bloccata() {
+	public void testgetStanzaAdiacente_DirezioneBloccata() {
 		assertEquals(this.bagno,this.bagno.getStanzaAdiacente("nord"));
+	}
+	@Test
+	public void testgetStanzaAdiacente_DirezioneNonBloccata() {
+		assertEquals(this.sgabuzzino,this.bagno.getStanzaAdiacente("est"));
 	}
 }
