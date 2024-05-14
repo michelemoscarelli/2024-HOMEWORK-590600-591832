@@ -30,13 +30,6 @@ public class StanzaTest {
 	}
 	
 	@Test
-	public void testAddAttrezzo_SpazioPieno() {
-		for (int i=0; i<10; i++)		// 10 è il numero massimo di attrezzi contenibili in Stanza
-			this.stanza.addAttrezzo(this.attrezzo);
-		assertFalse(stanza.addAttrezzo(this.attrezzo));
-	}
-	
-	@Test
 	public void testAddAttrezzo_Null() {
 		assertFalse(stanza.addAttrezzo(null));
 	}

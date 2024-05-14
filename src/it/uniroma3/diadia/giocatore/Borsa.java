@@ -7,7 +7,6 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
-	//private Attrezzo[] attrezzi;
 	private ArrayList<Attrezzo> attrezzi;
 	private int numeroAttrezzi;
 	private int pesoMax;
@@ -55,8 +54,8 @@ public class Borsa {
 	}
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = null;
-
 		Iterator<Attrezzo> it = this.attrezzi.iterator();
+		
 		while(it.hasNext()) {
 			if(it.next().getNome().equals(nomeAttrezzo)) {
 				a = it.next();
