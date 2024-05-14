@@ -10,7 +10,7 @@ public class ComandoGuarda implements Comando{
 	@Override
 	public void esegui(Partita partita) {
 		this.io.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().toString());
-		this.io.mostraMessaggio("ed hai: " + partita.getGiocatore().getCfu());
+		this.io.mostraMessaggio("ed hai: " + partita.getGiocatore().getCfu() + " CFU");
 		
 	}
 
