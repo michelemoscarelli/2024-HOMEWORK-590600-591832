@@ -31,12 +31,6 @@ public class BorsaTest {
 		assertTrue(this.borsa.addAttrezzo(this.attrezzo));
 	}
 	
-	@Test
-	public void testAddAttrezzo_SpazioPieno() {
-		for (int i=0; i<10; i++)		// 10 è il numero massimo di attrezzi contenibili in Borsa
-			this.borsa.addAttrezzo(this.attrezzo);
-		assertFalse(borsa.addAttrezzo(this.attrezzo));
-	}
 	
 	@Test
 	public void testAddAttrezzo_PesoMassimoDefault() {
