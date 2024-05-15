@@ -2,6 +2,7 @@ package it.uniroma3.diadia.giocatore;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -13,11 +14,13 @@ public class Borsa {
 	public Borsa() {
 		this(DEFAULT_PESO_MAX_BORSA);
 	}
+	
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
 		this.attrezzi = new ArrayList<>();
 		this.numeroAttrezzi = 0;
 	}
+	
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if(attrezzo==null) return false;
 		
@@ -27,9 +30,11 @@ public class Borsa {
 		this.numeroAttrezzi++;
 		return true;
 	}
+	
 	public int getPesoMax() {
 		return pesoMax;
 	}
+	
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = null;
 		for (Attrezzo a1: this.attrezzi)
@@ -46,12 +51,15 @@ public class Borsa {
 
 		return peso;
 	}
+	
 	public boolean isEmpty() {
 		return this.numeroAttrezzi == 0;
 	}
+	
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		return this.getAttrezzo(nomeAttrezzo)!=null;
 	}
+	
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
 		Attrezzo a = null;
 		Iterator<Attrezzo> it = this.attrezzi.iterator();
@@ -65,6 +73,7 @@ public class Borsa {
 		}
 		return a; // se attrezzo è stato trovato, "a" contiene l'attrezzo eliminato, altrimenti null
 	}
+	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 
@@ -76,5 +85,11 @@ public class Borsa {
 		else
 			s.append("Borsa vuota");
 		return s.toString();
+	}
+	
+	List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		
+		return attrezzi;
+		
 	}
 }

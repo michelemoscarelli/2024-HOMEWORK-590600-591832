@@ -39,7 +39,7 @@ public class Stanza {
         this.attrezzi = new ArrayList<>();
         this.numeroAttrezzi = 0;
         this.numeroStanzeAdiacenti = 0;
-        this.stanzeAdiacenti = new HashMap<String, Stanza>();
+        this.stanzeAdiacenti = new HashMap<>();
     }
 
     /**
