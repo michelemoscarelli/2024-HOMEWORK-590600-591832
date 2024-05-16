@@ -167,7 +167,6 @@ public class Stanza {
 				out = true;
 				it.remove();
 			}
-			it.next();
 		}
 		return out;	// se attrezzo non è stato trovato in this.attrezzi[]
 	}

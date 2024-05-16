@@ -1,10 +1,17 @@
 package it.uniroma3.diadia.giocatore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.attrezzi.ComparatorePerNumeroAttrezzi;
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
@@ -69,27 +76,60 @@ public class Borsa {
 				a = it.next();
 				it.remove();
 			}
-			it.next();
 		}
 		return a; // se attrezzo è stato trovato, "a" contiene l'attrezzo eliminato, altrimenti null
 	}
 	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
+			
+		
+		//s.append("Contenuto raggruppato per peso = "+ this.getContenutoRaggruppatoPerPeso()+ " ");
 
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-			for (Attrezzo a: this.attrezzi)
-				s.append(a.toString()+" ");
+			s.append("Contenuto borsa = "+ this.getContenutoOrdinatoPerPeso()+ " ");
+			s.append("Contenuto ordinato per nome = "+ this.getContenutoOrdinatoPerNome()+ " ");
 		}
 		else
 			s.append("Borsa vuota");
 		return s.toString();
 	}
 	
-	List<Attrezzo> getContenutoOrdinatoPerPeso(){
+	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		
-		return attrezzi;
+		ComparatorePerNumeroAttrezzi comp = new ComparatorePerNumeroAttrezzi();
+		SortedSet<Attrezzo> temp = getContenutoOrdinatoPerNome();
+		ArrayList<Attrezzo> out = new ArrayList<Attrezzo>();
+		out.addAll(temp);
+		out.sort(comp);
+		return out;
 		
+	}
+	
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+		TreeSet<Attrezzo> out  = new TreeSet<Attrezzo>();
+		out.addAll(this.attrezzi);
+		return out;
+		
+	}
+	// non funge penso sia un problema di iterator
+	Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		Map<Integer,Set<Attrezzo>> out = new HashMap<>();
+		ArrayList<Attrezzo> in = this.attrezzi;
+		for(Attrezzo a: in) {
+			int val = a.getPeso();
+			Set<Attrezzo> temp = new TreeSet<>();
+			Iterator<Attrezzo> it = in.iterator();
+			while(it.hasNext()) {
+				if(it.next().getPeso()==val) {
+					temp.add(it.next());
+					it.remove();
+				}
+			}
+			out.put(a.getPeso(), temp);
+		}
+		return out;
+		 
 	}
 }
