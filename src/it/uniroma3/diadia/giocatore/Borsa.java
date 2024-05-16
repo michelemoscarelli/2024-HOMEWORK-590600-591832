@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.giocatore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -89,7 +90,7 @@ public class Borsa {
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
 			s.append("Contenuto borsa = "+ this.getContenutoOrdinatoPerPeso()+ " ");
-			s.append("Contenuto ordinato per nome = "+ this.getContenutoOrdinatoPerNome()+ " ");
+			s.append("Contenuto ordinato per nome = "+ this.getContenutoOrdinatoPerNome().toString().replace("[", "{").replace("]", "}")+ " ");
 		}
 		else
 			s.append("Borsa vuota");
@@ -102,7 +103,7 @@ public class Borsa {
 		SortedSet<Attrezzo> temp = getContenutoOrdinatoPerNome();
 		ArrayList<Attrezzo> out = new ArrayList<Attrezzo>();
 		out.addAll(temp);
-		out.sort(comp);
+		Collections.sort(out, comp);
 		return out;
 		
 	}
