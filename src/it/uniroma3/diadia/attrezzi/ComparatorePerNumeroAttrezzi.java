@@ -6,6 +6,9 @@ public class ComparatorePerNumeroAttrezzi implements Comparator<Attrezzo> {
 
 @Override
 public int compare(Attrezzo a1, Attrezzo a2) {
-	return a1.getPeso()- a2.getPeso();
+	if(a1.getPeso()==a2.getPeso())
+		return a1.getNome().compareTo(a2.getNome());
+	else
+	    return a1.getPeso()- a2.getPeso();
 }
 }

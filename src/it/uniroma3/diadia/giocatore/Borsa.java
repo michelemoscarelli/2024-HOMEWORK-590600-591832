@@ -100,9 +100,7 @@ public class Borsa {
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		
 		ComparatorePerNumeroAttrezzi comp = new ComparatorePerNumeroAttrezzi();
-		SortedSet<Attrezzo> temp = getContenutoOrdinatoPerNome();
-		ArrayList<Attrezzo> out = new ArrayList<Attrezzo>();
-		out.addAll(temp);
+		ArrayList<Attrezzo> out = this.attrezzi;
 		Collections.sort(out, comp);
 		return out;
 		
@@ -114,14 +112,12 @@ public class Borsa {
 		return out;
 		
 	}
-	// non funge penso sia un problema di iterator
 	Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
 		Map<Integer,Set<Attrezzo>> out = new HashMap<>();
-		ArrayList<Attrezzo> in = this.attrezzi;
-		for(Attrezzo a: in) {
+		for(Attrezzo a: this.attrezzi) {
 			int val = a.getPeso();
 			Set<Attrezzo> temp = new TreeSet<>();
-			for(Attrezzo a1: in) {
+			for(Attrezzo a1: this.attrezzi) {
 				if(a1.getPeso()==val)
 					temp.add(a1);
 			}
