@@ -84,13 +84,13 @@ public class Borsa {
 	public String toString() {
 		StringBuilder s = new StringBuilder();
 			
-		
-		//s.append("Contenuto raggruppato per peso = "+ this.getContenutoRaggruppatoPerPeso()+ " ");
 
 		if (!this.isEmpty()) {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-			s.append("Contenuto borsa = "+ this.getContenutoOrdinatoPerPeso()+ " ");
-			s.append("Contenuto ordinato per nome = "+ this.getContenutoOrdinatoPerNome().toString().replace("[", "{").replace("]", "}")+ " ");
+			s.append(this.getContenutoOrdinatoPerPeso()+ "\n");
+			s.append("Contenuto ordinato per nome = "+ this.getContenutoOrdinatoPerNome().toString().replace("[", "{").replace("]", "}"));
+			s.append(". raggruppato per peso = "+ this.getContenutoRaggruppatoPerPeso().toString().replace("=", ", ")
+					.replace("[", "{").replace("]", "}")+ " ");
 		}
 		else
 			s.append("Borsa vuota");
@@ -121,14 +121,11 @@ public class Borsa {
 		for(Attrezzo a: in) {
 			int val = a.getPeso();
 			Set<Attrezzo> temp = new TreeSet<>();
-			Iterator<Attrezzo> it = in.iterator();
-			while(it.hasNext()) {
-				if(it.next().getPeso()==val) {
-					temp.add(it.next());
-					it.remove();
-				}
+			for(Attrezzo a1: in) {
+				if(a1.getPeso()==val)
+					temp.add(a1);
 			}
-			out.put(a.getPeso(), temp);
+			out.put(val, temp);
 		}
 		return out;
 		 
