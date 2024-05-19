@@ -8,24 +8,37 @@ import org.junit.Test;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.ComandoPosa;
-import it.uniroma3.diadia.comandi.ComandoPrendi;
 
 public class ComandoPosaTest {
 	private ComandoPosa comandoposa;
-	private Partita partita;
+	private LabirintoBuilder labirintoBuilder;
+	private Partita partitamono;
+	private Partita partitabi;
 	private Attrezzo attrezzo;
 	private IO io;
-	private Attrezzo pesante;
 
 	@Before
 	public void setUp() throws Exception {
+		
+		labirintoBuilder = new LabirintoBuilder();
+		Labirinto monolocale = labirintoBuilder.addStanzaIniziale("salotto").addStanzaVincente("salotto").getLabirinto();
+		this.partitamono = new Partita(monolocale);
+		
+		Labirinto bilocale = labirintoBuilder
+				.addStanzaIniziale("salotto")
+				.addStanzaVincente("cucina")
+				.addAdiacenza("salotto","cucina", "nord")
+				.addAdiacenza("cucina", "salotto", "sud")
+				.getLabirinto();
+		this.partitabi = new Partita(bilocale);
+		
 		this.io = new IOConsole();
 		this.comandoposa = new ComandoPosa();
-		this.partita = new Partita();
 		this.attrezzo = new Attrezzo("attrezzo_qualunque",2);
-		this.pesante = new Attrezzo("attrezzo_pesante",10);
 		this.comandoposa.setIO(this.io);
 	}
 
@@ -33,31 +46,39 @@ public class ComandoPosaTest {
 
 	
 	@Test
-	public void testEsegui_AttrezzoNonEsiste() {
+	public void testEsegui_AttrezzoNonEsisteMono() {
+		
+		this.comandoposa.setParametro("attrezzo_qualunque");
+		this.comandoposa.esegui(this.partitamono);
+		assertFalse(this.partitamono.getLabirinto().getStanzaCorrente().hasAttrezzo("attrezzo_qualunque"));
+	}
+	
+	@Test
+	public void testEsegui_AttrezzoNonEsisteBi() {
+		
+		
 			
 		this.comandoposa.setParametro("attrezzo_qualunque");
-		this.comandoposa.esegui(this.partita);
-		assertFalse(this.partita.getLabirinto().getStanzaCorrente().hasAttrezzo("attrezzo_qualunque"));
+		this.comandoposa.esegui(this.partitabi);
+		assertFalse(this.partitabi.getLabirinto().getStanzaCorrente().hasAttrezzo("attrezzo_qualunque"));
 	}
 	
 	@Test
-	public void testEsegui_AttrezzoEsisteMaStanzaIsPiena() {
+	public void testEsegui_AttrezzoPosatoMono() {
 		//aggiunge attrezzo alla borsa
-		for (int i=0; i<10; i++)		// 10 è il numero massimo di attrezzi contenibili in Stanza
-			this.partita.getLabirinto().getStanzaCorrente().addAttrezzo(this.pesante);
-		this.partita.getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
+		this.partitamono.getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
 		this.comandoposa.setParametro("attrezzo_qualunque");
-		this.comandoposa.esegui(this.partita);
-		assertFalse(this.partita.getLabirinto().getStanzaCorrente().hasAttrezzo("attrezzo_qualunque"));
+		this.comandoposa.esegui(this.partitamono);
+		assertEquals(attrezzo,this.partitamono.getLabirinto().getStanzaCorrente().getAttrezzo("attrezzo_qualunque"));
 	}
 	
 	@Test
-	public void testEsegui_AttrezzoPosato() {
+	public void testEsegui_AttrezzoPosatoBi() {
 		//aggiunge attrezzo alla borsa
-		this.partita.getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
+		this.partitabi.getGiocatore().getBorsa().addAttrezzo(this.attrezzo);
 		this.comandoposa.setParametro("attrezzo_qualunque");
-		this.comandoposa.esegui(this.partita);
-		assertEquals(attrezzo,this.partita.getLabirinto().getStanzaCorrente().getAttrezzo("attrezzo_qualunque"));
+		this.comandoposa.esegui(this.partitabi);
+		assertEquals(attrezzo,this.partitabi.getLabirinto().getStanzaCorrente().getAttrezzo("attrezzo_qualunque"));
 	}
 	
 	/* test setParametro */
