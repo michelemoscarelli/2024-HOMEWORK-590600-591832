@@ -12,7 +12,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.attrezzi.ComparatorePerNumeroAttrezzi;
+import it.uniroma3.diadia.attrezzi.ComparatoreAttrezzo;
 
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
@@ -99,7 +99,7 @@ public class Borsa {
 	
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
 		
-		ComparatorePerNumeroAttrezzi comp = new ComparatorePerNumeroAttrezzi();
+		ComparatoreAttrezzo comp = new ComparatoreAttrezzo();
 		ArrayList<Attrezzo> out = this.attrezzi;
 		Collections.sort(out, comp);
 		return out;
@@ -112,18 +112,38 @@ public class Borsa {
 		return out;
 		
 	}
-	Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+	
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
 		Map<Integer,Set<Attrezzo>> out = new HashMap<>();
 		for(Attrezzo a: this.attrezzi) {
-			int val = a.getPeso();
+			int key = a.getPeso();
 			Set<Attrezzo> temp = new TreeSet<>();
 			for(Attrezzo a1: this.attrezzi) {
-				if(a1.getPeso()==val)
+				if(a1.getPeso()==key)
 					temp.add(a1);
 			}
-			out.put(val, temp);
+			out.put(key, temp);
 		}
 		return out;
-		 
 	}
+	
+	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso() {
+		TreeSet<Attrezzo> out  = new TreeSet<Attrezzo>();
+		ComparatoreAttrezzo comp = new ComparatoreAttrezzo();
+		for(Attrezzo a: this.attrezzi) {
+			int pesoA = a.getPeso();
+			Set<Attrezzo> temp = new TreeSet<>();
+			for(Attrezzo a1: this.attrezzi) {
+				if(a1.getPeso()==pesoA)
+					temp.add(a1);
+			}
+		}
+		
+		return out;
+	}
+	
+	public ArrayList<Attrezzo> getAttrezzi() {
+		return this.attrezzi;
+	}
+
 }
