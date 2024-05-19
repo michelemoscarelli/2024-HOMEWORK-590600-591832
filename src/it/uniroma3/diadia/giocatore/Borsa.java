@@ -106,6 +106,11 @@ public class Borsa {
 		
 	}
 	
+	SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
+		TreeSet<Attrezzo> out  = new TreeSet<Attrezzo>(new ComparatoreAttrezzo());
+		out.addAll(this.attrezzi);
+		return out;
+	}
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
 		TreeSet<Attrezzo> out  = new TreeSet<Attrezzo>();
 		out.addAll(this.attrezzi);
@@ -124,21 +129,6 @@ public class Borsa {
 			}
 			out.put(key, temp);
 		}
-		return out;
-	}
-	
-	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso() {
-		TreeSet<Attrezzo> out  = new TreeSet<Attrezzo>();
-		ComparatoreAttrezzo comp = new ComparatoreAttrezzo();
-		for(Attrezzo a: this.attrezzi) {
-			int pesoA = a.getPeso();
-			Set<Attrezzo> temp = new TreeSet<>();
-			for(Attrezzo a1: this.attrezzi) {
-				if(a1.getPeso()==pesoA)
-					temp.add(a1);
-			}
-		}
-		
 		return out;
 	}
 	
