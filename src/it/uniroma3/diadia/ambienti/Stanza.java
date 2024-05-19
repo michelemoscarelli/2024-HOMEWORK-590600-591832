@@ -180,4 +180,9 @@ public class Stanza {
 		return this.numeroAttrezzi;
 	}
 
+	public Map<String,Stanza> getMapStanzeAdiacenti() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

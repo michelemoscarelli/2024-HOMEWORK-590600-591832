@@ -83,6 +83,10 @@ public class Labirinto {
 	public void setUscita(Stanza uscita) {
 		this.uscita = uscita;
 	}
-	
+
+	public Stanza getStanzaIniziale() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
