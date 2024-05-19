@@ -181,8 +181,11 @@ public class Stanza {
 	}
 
 	public Map<String,Stanza> getMapStanzeAdiacenti() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.stanzeAdiacenti;
 	}
-
+	
+	public boolean isMagica() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

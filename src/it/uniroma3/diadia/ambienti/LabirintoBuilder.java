@@ -1,59 +1,90 @@
 package it.uniroma3.diadia.ambienti;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class LabirintoBuilder {
+	private Labirinto labirinto;
+	private Map<String, Stanza> stanze;
+	private Stanza ultimaAggiunta;
+	
+	public LabirintoBuilder() {
+		this.labirinto = new Labirinto();
+		this.stanze = new HashMap<String, Stanza>();
+	}
+	
+	
+	
 
 	public LabirintoBuilder addStanzaIniziale(String nomeStanzaIniziale) {
-		// TODO Auto-generated method stub
-		return null;
+		Stanza s = new Stanza(nomeStanzaIniziale);
+		this.setUltimaStanzaAggiunta(s);
+		this.labirinto.setStanzaIniziale(s);
+		this.labirinto.setStanzaCorrente(s);
+		return this;
 	}
 
-	public LabirintoBuilder addStanzaVincente(String nomeStanzaIniziale) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Labirinto getLabirinto() {
-		// TODO Auto-generated method stub
-		return null;
+	public LabirintoBuilder addStanzaVincente(String nomeStanzaVincente) {
+		Stanza s = new Stanza(nomeStanzaVincente);
+		this.setUltimaStanzaAggiunta(s);
+		this.labirinto.setStanzaVincente(s);
+		return this;
 	}
 
 	public LabirintoBuilder addAttrezzo(String string, int i) {
-		// TODO Auto-generated method stub
-		return null;
+		Attrezzo a = new Attrezzo(string, i);
+		if (this.ultimaAggiunta==null) return this;
+		
+		this.ultimaAggiunta.addAttrezzo(a);
+		return this;
 	}
 
-	public LabirintoBuilder addStanza(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public LabirintoBuilder addStanza(String nomeStanza) {
+		Stanza s = new Stanza(nomeStanza);
+		this.setUltimaStanzaAggiunta(s);
+		return this;
 	}
 
-	public LabirintoBuilder addAdiacenza(String nomeStanzaIniziale, String string, String string2) {
-		// TODO Auto-generated method stub
-		return null;
+	public LabirintoBuilder addAdiacenza(String nomeStanzaA, String nomeStanzaB, String direzione) {
+		Stanza sA = this.stanze.get(nomeStanzaA);
+		Stanza sB = this.stanze.get(nomeStanzaB);
+		sA.impostaStanzaAdiacente(direzione, sB);
+		return this;
 	}
 
-	public LabirintoBuilder addStanzaBloccata(String string, String string2, String string3) {
-		// TODO Auto-generated method stub
-		return null;
+	public LabirintoBuilder addStanzaBloccata(String nomeStanzaBloccata, String direzioneBloccata, String nomeAttrezzoChiave) {
+		StanzaBloccata s = new StanzaBloccata(nomeStanzaBloccata, direzioneBloccata, nomeAttrezzoChiave);
+		this.setUltimaStanzaAggiunta(s);
+		return this;
 	}
 
-	public LabirintoBuilder addStanzaMagica(String string, int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public LabirintoBuilder addStanzaMagica(String nomeStanzaMagica, int soglia) {
+		StanzaMagica s = new StanzaMagica(nomeStanzaMagica, soglia);
+		this.setUltimaStanzaAggiunta(s);
+		return this;
 	}
 
-	public LabirintoBuilder addStanzaBuia(String string, String string2) {
-		// TODO Auto-generated method stub
-		return null;
+	public LabirintoBuilder addStanzaBuia(String nomeStanzaBuia, String nomeAttrezzoLuce) {
+		StanzaBuia s = new StanzaBuia(nomeStanzaBuia, nomeAttrezzoLuce);
+		this.setUltimaStanzaAggiunta(s);
+		return this;
 	}
 
-	public List<Stanza> getListaStanze() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	public void setUltimaStanzaAggiunta(Stanza stanza) {
+		this.ultimaAggiunta = stanza;
+		this.stanze.put(stanza.getNome(), stanza);
+	}
+
+	public Labirinto getLabirinto() {
+		return this.labirinto;
+	}
+	
+	public Map<String,Stanza> getListaStanze() {
+		return this.stanze;
 	}
 	
 	

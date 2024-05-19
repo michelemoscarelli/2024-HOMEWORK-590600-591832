@@ -8,7 +8,8 @@ public class Labirinto {
 	
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
-	
+	private Stanza stanzaIniziale;
+
 	public Labirinto() {
 		creaStanze();
 	}
@@ -85,8 +86,15 @@ public class Labirinto {
 	}
 
 	public Stanza getStanzaIniziale() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.stanzaIniziale;
+	}
+
+	public void setStanzaIniziale(Stanza stanzaIniziale) {
+		this.stanzaIniziale = stanzaIniziale;
+	}
+
+	public void setStanzaVincente(Stanza stanzaVincente) {
+		this.stanzaVincente = stanzaVincente;
 	}
 	
 }
