@@ -3,9 +3,6 @@ package it.uniroma3.diadia.ambienti;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Labirinto {
-	private Stanza entrata;
-	private Stanza uscita;
-	
 	private Stanza stanzaCorrente;
 	private Stanza stanzaVincente;
 	private Stanza stanzaIniziale;
@@ -67,22 +64,6 @@ public class Labirinto {
 
 	public Stanza getStanzaCorrente() {
 		return this.stanzaCorrente;
-	}
-
-	public Stanza getEntrata() {
-		return entrata;
-	}
-
-	public void setEntrata(Stanza entrata) {
-		this.entrata = entrata;
-	}
-
-	public Stanza getUscita() {
-		return uscita;
-	}
-
-	public void setUscita(Stanza uscita) {
-		this.uscita = uscita;
 	}
 
 	public Stanza getStanzaIniziale() {

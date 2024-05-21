@@ -27,7 +27,6 @@ public class Stanza {
 	private String nome;
 	private List<Attrezzo> attrezzi;
     private int numeroAttrezzi;
-    private int numeroStanzeAdiacenti;
     private Map<String,Stanza> stanzeAdiacenti;
     
     /**
@@ -38,7 +37,6 @@ public class Stanza {
         this.nome = nome;
         this.attrezzi = new ArrayList<>();
         this.numeroAttrezzi = 0;
-        this.numeroStanzeAdiacenti = 0;
         this.stanzeAdiacenti = new HashMap<>();
     }
 
@@ -54,8 +52,8 @@ public class Stanza {
         
         /* se alla chiave non era assegnato alcun valore, vuol dire che si sta impostando una
          * direzione nuova, quindi incrementa il numeroStanzeAdiacenti */
-        if (v==null)
-        	this.numeroStanzeAdiacenti++;
+        if (v==null) {
+		}
 
     	//if (this.numeroStanzeAdiacenti < NUMERO_MASSIMO_DIREZIONI) {}	è da prendere in considerazione questa condizione?
     }
@@ -185,7 +183,6 @@ public class Stanza {
 	}
 	
 	public boolean isMagica() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

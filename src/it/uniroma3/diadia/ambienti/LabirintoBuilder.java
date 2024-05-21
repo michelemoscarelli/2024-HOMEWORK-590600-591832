@@ -55,19 +55,19 @@ public class LabirintoBuilder {
 	}
 
 	public LabirintoBuilder addStanzaBloccata(String nomeStanzaBloccata, String direzioneBloccata, String nomeAttrezzoChiave) {
-		StanzaBloccata s = new StanzaBloccata(nomeStanzaBloccata, direzioneBloccata, nomeAttrezzoChiave);
+		Stanza s = new StanzaBloccata(nomeStanzaBloccata, direzioneBloccata, nomeAttrezzoChiave);
 		this.setUltimaStanzaAggiunta(s);
 		return this;
 	}
 
 	public LabirintoBuilder addStanzaMagica(String nomeStanzaMagica, int soglia) {
-		StanzaMagica s = new StanzaMagica(nomeStanzaMagica, soglia);
+		Stanza s = new StanzaMagica(nomeStanzaMagica, soglia);
 		this.setUltimaStanzaAggiunta(s);
 		return this;
 	}
 
 	public LabirintoBuilder addStanzaBuia(String nomeStanzaBuia, String nomeAttrezzoLuce) {
-		StanzaBuia s = new StanzaBuia(nomeStanzaBuia, nomeAttrezzoLuce);
+		Stanza s = new StanzaBuia(nomeStanzaBuia, nomeAttrezzoLuce);
 		this.setUltimaStanzaAggiunta(s);
 		return this;
 	}

@@ -73,13 +73,14 @@ public class Borsa {
 		Iterator<Attrezzo> it = this.attrezzi.iterator();
 		
 		while(it.hasNext()) {
-			if(it.next().getNome().equals(nomeAttrezzo)) {
-				a = it.next();
+			a = it.next();
+			if(a.getNome().equals(nomeAttrezzo)) {		
 				it.remove();
+				return a;
 			}
 		}
-		return a; // se attrezzo è stato trovato, "a" contiene l'attrezzo eliminato, altrimenti null
-	}
+		return null; 
+	}// se attrezzo è stato trovato,il metodo ritorna l'attrezzo eliminato, altrimenti null
 	
 	public String toString() {
 		StringBuilder s = new StringBuilder();
@@ -106,7 +107,7 @@ public class Borsa {
 		
 	}
 	
-	SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
+	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
 		TreeSet<Attrezzo> out  = new TreeSet<Attrezzo>(new ComparatoreAttrezzo());
 		out.addAll(this.attrezzi);
 		return out;

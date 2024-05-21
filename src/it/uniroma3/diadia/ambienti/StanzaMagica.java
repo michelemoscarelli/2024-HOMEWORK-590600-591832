@@ -38,5 +38,9 @@ public class StanzaMagica extends Stanza {
 				pesoX2);
 		return attrezzo;
 	}
+	@Override
+	public boolean isMagica() {
+		return true;
+	}
 }
 
