@@ -263,7 +263,7 @@ public class LabirintoBuilderTest {
 		assertEquals(new Attrezzo(nomeAttrezzo1,peso1), listaStanze.get(nomeStanzaMagica).getAttrezzo(nomeAttrezzo1));
 	}
 
-
+	// aggiungere .getNome() nell'equals per farlo funzionare
 	@Test
 	public void testLabirintoConStanzaBloccata_ConPassepartout() {
 		this.labirintoBuilder
@@ -279,6 +279,7 @@ public class LabirintoBuilderTest {
 		assertEquals(stanzaVincente,labirintoBuilder.getListaStanze().get("stanza bloccata").getStanzaAdiacente("nord"));	
 	}
 
+	// aggiungere .getNome() nell'equals per farlo funzionare
 	@Test
 	public void testLabirintoConStanzaBloccata_SenzaPassepartout() {
 		this.labirintoBuilder
