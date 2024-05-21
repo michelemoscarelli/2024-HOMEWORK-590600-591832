@@ -16,13 +16,17 @@ public class StanzaBloccataTest {
 	private Labirinto trilocale;
 	private LabirintoBuilder labirintoBuilder;
 	private Attrezzo chiave;
+	private String nomeStanzaIniziale = "bagno";
+	private String nomeStanzaVincente = "cucina";
 
 	@Before
 	public void setUp(){
 		
-		trilocale = labirintoBuilder.addStanzaIniziale("bagno").addStanzaBloccata("bagno","nord", "chiave").addStanzaVincente("cucina")
-				.addAdiacenza("bagno", "cucina", "nord").addAdiacenza("cucina", "bagno", "sud").addStanza("sgabuzzino")
-				.addAdiacenza("bagno", "sgabuzzino", "est").addAdiacenza("sgabuzzino","bagno" , "ovest").getLabirinto();	
+		labirintoBuilder = new LabirintoBuilder();
+		trilocale = labirintoBuilder.addStanzaIniziale(nomeStanzaIniziale).addStanzaBloccata(nomeStanzaIniziale,"nord", "chiave").addStanzaVincente(nomeStanzaVincente)
+				.addAdiacenza(nomeStanzaIniziale, nomeStanzaVincente, "nord").addAdiacenza(nomeStanzaVincente, nomeStanzaIniziale, "sud")
+				//.addStanza("sgabuzzino").addAdiacenza("bagno", "sgabuzzino", "est").addAdiacenza("sgabuzzino","bagno" , "ovest")
+				.getLabirinto();	
 		this.chiave = new  Attrezzo("chiave", 2);
 		
 		/*this.chiave = new  Attrezzo("chiave", 2);
@@ -37,24 +41,24 @@ public class StanzaBloccataTest {
 
 	@Test
 	public void testgetDescrizione_StanzaSbloccabile() {
-		this.trilocale.getEntrata().addAttrezzo(chiave);
-		assertEquals(this.trilocale.getEntrata().toString(),this.trilocale.getEntrata().getDescrizione());
+		this.trilocale.getStanzaIniziale().addAttrezzo(chiave);
+		assertEquals(this.trilocale.getStanzaIniziale().toString(),this.trilocale.getStanzaIniziale().getDescrizione());
 	}
 	
 	@Test
 	public void testgetDescrizione_StanzaSenzaChiave() {
-		assertEquals("Stanza bloccata nella direzione: "+ "nord"+"\nPrendi l'attrezzo " + "chiave" + " e posalo nella stanza",this.trilocale.getEntrata().getDescrizione());
+		assertEquals("Stanza bloccata nella direzione: "+ "nord"+"\nPrendi l'attrezzo " + "chiave" + " e posalo nella stanza",this.trilocale.getStanzaIniziale().getDescrizione());
 		
 	}
-	/*@Test
+	@Test
 	public void testgetStanzaAdiacente_Sbloccata() {
-		this.trilocale.getEntrata().addAttrezzo(chiave);
-		assertEquals(this.trilocale.get,this.trilocale.getEntrata().getStanzaAdiacente("nord"));
-	}*/
+		this.trilocale.getStanzaIniziale().addAttrezzo(chiave);
+		assertEquals(this.trilocale.getStanzaCorrente(),this.trilocale.getStanzaIniziale().getStanzaAdiacente("nord"));
+	}
 	
 	@Test
 	public void testgetStanzaAdiacente_DirezioneBloccata() {
-		assertEquals(this.trilocale.getEntrata(),this.trilocale.getEntrata().getStanzaAdiacente("nord"));
+		assertEquals(this.trilocale.getStanzaIniziale(),this.trilocale.getStanzaIniziale().getStanzaAdiacente("nord"));
 	}
 	/*@Test
 	public void testgetStanzaAdiacente_DirezioneNonBloccata() {

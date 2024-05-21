@@ -14,6 +14,8 @@ public class PartitaTest {
 	
 	@Before
 	public void setUp() {
+		
+		labirintoBuilder = new LabirintoBuilder();
 		Labirinto bilocale = labirintoBuilder.addStanzaIniziale("salotto").addStanzaVincente("cucina")
 				.addAdiacenza("salotto", "cucina", "nord").addAdiacenza("cucina", "salotto", "sud").getLabirinto();
 		this.partita = new Partita(bilocale);

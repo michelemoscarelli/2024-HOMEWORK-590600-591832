@@ -24,6 +24,7 @@ public class ComandoPrendiTest {
 	@Before
 	public void setUp() throws Exception {
 		this.io = new IOConsole();
+		this.labirintoBuilder = new LabirintoBuilder();
 		this.comandoprendi = new ComandoPrendi();
 		Labirinto bilocale = labirintoBuilder.addStanzaIniziale("salotto").addStanzaVincente("cucina")
 				.addAdiacenza("salotto", "cucina", "nord").addAdiacenza("cucina", "salotto", "sud").getLabirinto();

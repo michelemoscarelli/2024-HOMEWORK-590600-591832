@@ -22,6 +22,7 @@ public class ComandoVaiTest {
 	public void setUp() throws Exception {
 		this.io = new IOConsole();
 		this.comandovai = new ComandoVai();
+		labirintoBuilder = new LabirintoBuilder();
 		Labirinto bilocale = labirintoBuilder.addStanzaIniziale("salotto").addStanzaVincente("cucina")
 				.addAdiacenza("salotto", "cucina", "nord").addAdiacenza("cucina", "salotto", "sud").getLabirinto();
 		this.partita = new Partita(bilocale);
@@ -33,14 +34,14 @@ public class ComandoVaiTest {
 	public void testEsegui_ParametroValido() {
 		this.comandovai.setParametro("nord");
 		this.comandovai.esegui(this.partita);
-		assertEquals(this.partita.getLabirinto().getStanzaCorrente(),this.partita.getLabirinto().getStanzaCorrente().getStanzaAdiacente("sud"));
+		assertEquals(this.partita.getLabirinto().getStanzaIniziale(),this.partita.getLabirinto().getStanzaCorrente().getStanzaAdiacente("sud"));
 	}
 	
 	@Test
 	public void testEsegui_ParametroNonValidoNullo() {
 		this.comandovai.setParametro("pippo");
 		this.comandovai.esegui(this.partita);
-		assertEquals(this.partita.getLabirinto().getEntrata(),this.partita.getLabirinto().getStanzaCorrente());
+		assertEquals(this.partita.getLabirinto().getStanzaIniziale(),this.partita.getLabirinto().getStanzaCorrente());
 	}
 	
 	
