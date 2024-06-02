@@ -1,12 +1,10 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPrendi implements Comando{
+public class ComandoPrendi extends AbstractComando {
 	
-	private IO io;
 	private String nomeAttrezzo;
 	
 
@@ -14,7 +12,7 @@ public class ComandoPrendi implements Comando{
 	public void esegui(Partita partita) {
 		/* il nome dell'attrezzo è null, stampa messaggio di errore e ritorna */
 		if (nomeAttrezzo==null) {
-			this.io.mostraMessaggio("Parametro non valido");
+			this.getIo().mostraMessaggio("Parametro non valido");
 			return;
 		}
 		/* il nome dell'attrezzo non è null, cercalo tra gli attrezzi della stanza */
@@ -29,22 +27,22 @@ public class ComandoPrendi implements Comando{
 			
 			/* borsa è piena */
 			if ( !(preso_in_borsa) ) {
-				this.io.mostraMessaggio("Impossibile prendere l'attrezzo"+" "+nomeAttrezzo+":"+" "+"borsa piena o già troppo pesante.");
+				this.getIo().mostraMessaggio("Impossibile prendere l'attrezzo"+" "+nomeAttrezzo+":"+" "+"borsa piena o già troppo pesante.");
 				return;
 			}
 			/* borsa non è piena: attrezzo preso */
-			this.io.mostraMessaggio("Attrezzo"+" "+nomeAttrezzo+" "+"preso.");
+			this.getIo().mostraMessaggio("Attrezzo"+" "+nomeAttrezzo+" "+"preso.");
 			
 			/* toglilo dalla stanza */
 			/* se removeAttrezzo restituisce false anziché true, stampa messaggio di errore,
 			 * altrimenti l'elemento è rimosso da stanza */
 			if ( !(partita.getLabirinto().getStanzaCorrente().removeAttrezzo(attrezzo_da_prendere)) ) {
-				this.io.mostraMessaggio("Errore: rimozione di"+" "+nomeAttrezzo+" "+"da stanza non riuscita.");
+				this.getIo().mostraMessaggio("Errore: rimozione di"+" "+nomeAttrezzo+" "+"da stanza non riuscita.");
 			}
 			return;
 		}
 		/* non esiste, stampa messaggio di errore e ritorna */
-		this.io.mostraMessaggio("Attrezzo non trovato nella stanza.");
+		this.getIo().mostraMessaggio("Attrezzo non trovato nella stanza.");
 		return;
 		
 	}
@@ -65,10 +63,5 @@ public class ComandoPrendi implements Comando{
 		return this.nomeAttrezzo;
 		
 	}
-	
-	@Override
-	public void setIO(IO io) {
-		this.io= io;
-		
-	}
+
 }
