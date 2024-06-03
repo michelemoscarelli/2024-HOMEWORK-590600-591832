@@ -31,6 +31,7 @@ private IO io;
 		nomeClasse.append( nomeComando.substring(1) ) ;
 		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoVai’
 		comando = (Comando)Class.forName(nomeClasse.toString()).newInstance();
+		comando.setIO(this.io);
 		comando.setParametro(parametro);
 		
 		return comando;
