@@ -2,17 +2,17 @@ package diadia;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.comandi.AbstractComando;
 
 public class AbstractComandoTest {
 	
-	public class fakeAbstractComando extends AbstractComando{
+	public static class FakeAbstractComando extends AbstractComando{
 
 
 		@Override
@@ -41,13 +41,13 @@ public class AbstractComandoTest {
 		
 	}
 
-	private IOConsole io;
-	private diadia.AbstractComandoTest.fakeAbstractComando fakeAbstractComando;
+	private IO io;
+	private FakeAbstractComando fakeAbstractComando;
 	
+	@Before
 	public void setUp() throws Exception {
 		this.io = new IOConsole();
-		fakeAbstractComando = new fakeAbstractComando();
-		//this.fakeAbstractComando.setIO(this.io);
+		this.fakeAbstractComando = new FakeAbstractComando();
 	}
 	
 	@Test
