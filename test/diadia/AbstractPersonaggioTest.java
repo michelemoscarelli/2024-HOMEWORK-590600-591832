@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.AbstractPersonaggio;
 
 public class AbstractPersonaggioTest {
@@ -20,7 +21,11 @@ public class AbstractPersonaggioTest {
 
 		@Override
 		public String agisci(Partita partita) {
-			// TODO Auto-generated method stub
+			return "test";
+		}
+
+		@Override
+		public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
 			return "test";
 		}
 
@@ -49,6 +54,11 @@ public class AbstractPersonaggioTest {
 	@Test
 	public void testsagisci() {
 		assertEquals("test",this.FakeAbstractPersonaggioTest.agisci(partita));
+	}
+	
+	@Test
+	public void testriceviRegalo() {
+		assertEquals("test",this.FakeAbstractPersonaggioTest.riceviRegalo(null,partita));
 	}
 
 
