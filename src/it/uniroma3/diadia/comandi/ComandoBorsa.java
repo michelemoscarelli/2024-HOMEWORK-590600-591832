@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
 public class ComandoBorsa extends AbstractComando{
@@ -18,7 +17,7 @@ public class ComandoBorsa extends AbstractComando{
 
 	@Override
 	public String getNome() {
-		return "borsa";
+		return "Borsa";
 		
 	}
 

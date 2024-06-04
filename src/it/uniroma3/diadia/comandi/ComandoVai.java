@@ -49,9 +49,7 @@ public class ComandoVai extends AbstractComando {
 
 	@Override
 	public String getNome() {
-		return "vai";
-		// TODO Auto-generated method stub
-
+		return "Vai";
 	}
 
 
