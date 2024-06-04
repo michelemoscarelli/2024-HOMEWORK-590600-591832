@@ -2,11 +2,13 @@ package it.uniroma3.diadia.giocatore;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Strega extends AbstractPersonaggio {
 	private static final String MESSAGGIO_SALUTATO = "Mi hai salutato? Ti mando nella stanza con più attrezzi";
 	private static final String MESSAGGIO_NON_SALUTATO = "Brutto infame non mi saluti?"
 			+ " Ora ti faccio vedere io. Ti mando nella stanza con meno attrezzi";
+	private static final String MESSAGGIO_REGALO = "Sciocco Giocatore volevi ingraziarti me con questa schifezza? MUHAHAHAHA";
 
 	public Strega(String nome, String presentaz) {
 		super(nome, presentaz);
@@ -49,6 +51,11 @@ public class Strega extends AbstractPersonaggio {
 			setStanzaCorrente(stanzaAttrezziMinimi(partita.getLabirinto().getStanzaCorrente()));
 			return MESSAGGIO_NON_SALUTATO;
 		}
+	}
+
+	@Override
+	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
+		return MESSAGGIO_REGALO;
 	}
 
 }
