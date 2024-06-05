@@ -60,7 +60,12 @@ public class DiaDia {
 		Comando comandoDaEseguire;
 		FabbricaDiComandiRiflessiva  factory = new FabbricaDiComandiRiflessiva(this.io);
 		
-		comandoDaEseguire = factory.costruisciComando(istruzione);
+		try {
+			comandoDaEseguire = factory.costruisciComando(istruzione);
+		}
+		catch(ClassNotFoundException e) {
+			comandoDaEseguire = factory.costruisciComando("nonValido");
+		}
 		comandoDaEseguire.esegui(this.partita); 
 		
 		if (this.partita.vinta())
