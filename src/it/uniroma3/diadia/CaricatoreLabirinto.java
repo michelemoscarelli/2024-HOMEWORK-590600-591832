@@ -67,7 +67,7 @@ public class CaricatoreLabirinto {
 		try {
 			String riga = this.reader.readLine();
 			check(riga.startsWith(marker),"era attesa una riga che cominciasse per "+marker);
-			return riga.substring(marker.length());
+			return riga.substring(marker.length());		//PRESUNTO ERRORE
 		} catch (IOException e) {
 			throw new FormatoFileNonValidoException(e.getMessage());
 		}
@@ -86,7 +86,9 @@ public class CaricatoreLabirinto {
 		Scanner scanner = new Scanner(string);
 		scanner.useDelimiter(",");
 		try (Scanner scannerDiParole = scanner) {
-			result.add(scannerDiParole.next());
+			while(scannerDiParole.hasNext()) {
+				result.add(scannerDiParole.next());
+			}
 		}
 		return result;
 	}
@@ -141,21 +143,23 @@ public class CaricatoreLabirinto {
 
 	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
 		String specificheUscite = this.leggiRigaCheCominciaPer(USCITE_MARKER);
-		try (Scanner scannerDiLinea = new Scanner(specificheUscite)) {			
+		for(String specifica : separaStringheAlleVirgole(specificheUscite)) {
+			try (Scanner scannerDiLinea = new Scanner(specifica)) {			
+				while (scannerDiLinea.hasNext()) {
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("le uscite di una stanza."));
+					String stanzaPartenza = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la direzione di una uscita della stanza "+stanzaPartenza));
+					String dir = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la destinazione di una uscita della stanza "+stanzaPartenza+" nella direzione "+dir));
+					String stanzaDestinazione = scannerDiLinea.next();
 
-			while (scannerDiLinea.hasNext()) {
-				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("le uscite di una stanza."));
-				String stanzaPartenza = scannerDiLinea.next();
-				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la direzione di una uscita della stanza "+stanzaPartenza));
-				String dir = scannerDiLinea.next();
-				check(scannerDiLinea.hasNext(),msgTerminazionePrecoce("la destinazione di una uscita della stanza "+stanzaPartenza+" nella direzione "+dir));
-				String stanzaDestinazione = scannerDiLinea.next();
-				
-				impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
-			}
-		} 
+					impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
+				}
+			} 
+		}
+
 	}
-	
+
 	private String msgTerminazionePrecoce(String msg) {
 		return "Terminazione precoce del file prima di leggere "+msg;
 	}
