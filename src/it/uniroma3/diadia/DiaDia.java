@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import java.util.Scanner;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
@@ -77,8 +79,9 @@ public class DiaDia {
 
 
 	public static void main(String[] argc) throws Exception {
-		IO io = new IOConsole();
-		Labirinto labirinto = new Labirinto();
+		Scanner scanner = new Scanner(System.in);
+		IO io = new IOConsole(scanner);
+		Labirinto labirinto = Labirinto.newBuilder("labirinto.txt").getLabirinto();
 		
 		DiaDia gioco = new DiaDia(labirinto, io);
 		gioco.gioca();
