@@ -1,0 +1,11 @@
+Stanze: salotto, cucina
+Stanze Buie:
+Stanze Bloccate:
+Stanze Magiche:
+Inizio: salotto
+Vincente: cucina
+Attrezzi:
+Cane:
+Strega:
+Mago:
+Uscite: salotto nord cucina,cucina sud salotto
