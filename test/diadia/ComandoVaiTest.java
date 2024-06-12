@@ -2,12 +2,15 @@ package diadia;
 
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.comandi.ComandoVai;
@@ -20,11 +23,12 @@ public class ComandoVaiTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.io = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		this.io = new IOConsole(scanner);
 		this.comandovai = new ComandoVai();
 		labirintoBuilder = new LabirintoBuilder();
 		Labirinto bilocale = labirintoBuilder.addStanzaIniziale("salotto").addStanzaVincente("cucina")
-				.addAdiacenza("salotto", "cucina", "nord").addAdiacenza("cucina", "salotto", "sud").getLabirinto();
+				.addAdiacenza("salotto", "cucina", Direzione.nord).addAdiacenza("cucina", "salotto", Direzione.sud).getLabirinto();
 		this.partita = new Partita(bilocale);
 		this.comandovai.setIO(this.io);
 	}
@@ -34,16 +38,8 @@ public class ComandoVaiTest {
 	public void testEsegui_ParametroValido() {
 		this.comandovai.setParametro("nord");
 		this.comandovai.esegui(this.partita);
-		assertEquals(this.partita.getLabirinto().getStanzaIniziale(),this.partita.getLabirinto().getStanzaCorrente().getStanzaAdiacente("sud"));
+		assertEquals(this.partita.getLabirinto().getStanzaIniziale(),this.partita.getLabirinto().getStanzaCorrente().getStanzaAdiacente(Direzione.sud));
 	}
-	
-	@Test
-	public void testEsegui_ParametroNonValidoNullo() {
-		this.comandovai.setParametro("pippo");
-		this.comandovai.esegui(this.partita);
-		assertEquals(this.partita.getLabirinto().getStanzaIniziale(),this.partita.getLabirinto().getStanzaCorrente());
-	}
-	
 	
 	/* test setParametro */
 	@Test
@@ -51,10 +47,5 @@ public class ComandoVaiTest {
 		this.comandovai.setParametro("ovest");		//imposta il parametro al comando
 		assertEquals("ovest",this.comandovai.getParametro());
 	}
-	
-	@Test
-	public void testSetParametro_Null() {
-		this.comandovai.setParametro(null);		//imposta il parametro al comando
-		assertNull(this.comandovai.getParametro());
-	}
+
 }

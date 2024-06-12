@@ -2,12 +2,15 @@ package diadia;
 
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -23,11 +26,12 @@ public class ComandoPrendiTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.io = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		this.io = new IOConsole(scanner);
 		this.labirintoBuilder = new LabirintoBuilder();
 		this.comandoprendi = new ComandoPrendi();
 		Labirinto bilocale = labirintoBuilder.addStanzaIniziale("salotto").addStanzaVincente("cucina")
-				.addAdiacenza("salotto", "cucina", "nord").addAdiacenza("cucina", "salotto", "sud").getLabirinto();
+				.addAdiacenza("salotto", "cucina", Direzione.nord).addAdiacenza("cucina", "salotto", Direzione.sud).getLabirinto();
 		this.partita = new Partita(bilocale);
 		this.attrezzo = new Attrezzo("attrezzo_qualunque",2);
 		this.pesante = new Attrezzo("attrezzo_pesante",10);

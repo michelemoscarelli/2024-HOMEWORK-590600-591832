@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.FormatoFileNonValidoException;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
@@ -21,12 +22,12 @@ public class CaricatoreLabirintoTest {
 	
 	@Before
 	public void setUp() throws FileNotFoundException, FormatoFileNonValidoException {
-		this.nomeFile = new String(/*C:\\Users\\pappa\\eclipse-workspace\\2024-HOMEWORK-590600-591832-main (2).zip_expanded\\2024-HOMEWORK-590600-591832-main\\test\\diadia\\*/"a.txt");
-		this.lab = new Labirinto(nomeFile);
+		this.nomeFile = new String("a.txt");
+		this.lab =Labirinto.newBuilder(nomeFile).getLabirinto();
 		
-		this.labirintoBuilder = new LabirintoBuilder();
+		this.labirintoBuilder = new LabirintoBuilder("pizza");
 		this.labAtteso = this.labirintoBuilder.addStanzaIniziale("N10").addAttrezzo("pinza", 2).addStanzaVincente("N11")
-				.addStanza("biblioteca").addAttrezzo("martello", 10).addAdiacenza("biblioteca", "N10", "nord").addAdiacenza("biblioteca", "N11", "sud").getLabirinto();
+				.addStanza("biblioteca").addAttrezzo("martello", 10).addAdiacenza("biblioteca", "N10", Direzione.nord).addAdiacenza("biblioteca", "N11", Direzione.sud).getLabirinto();
 		
 	}
 	

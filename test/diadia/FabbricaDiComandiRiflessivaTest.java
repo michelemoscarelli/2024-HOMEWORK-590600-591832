@@ -2,6 +2,8 @@ package diadia;
 
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +17,8 @@ public class FabbricaDiComandiRiflessivaTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		io = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		this.io = new IOConsole(scanner);
 		fabbrica = new FabbricaDiComandiRiflessiva(this.io);
 	}
 

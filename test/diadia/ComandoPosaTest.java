@@ -2,12 +2,15 @@ package diadia;
 
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -24,19 +27,20 @@ public class ComandoPosaTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		labirintoBuilder = new LabirintoBuilder();
-		Labirinto monolocale = labirintoBuilder.addStanzaIniziale("salotto").addStanzaVincente("salotto").getLabirinto();
+		Labirinto monolocale = new LabirintoBuilder("test2.txt").getLabirinto();
+		Labirinto monolocale1 = labirintoBuilder.addStanzaIniziale("salotto").addStanzaVincente("salotto").getLabirinto();
 		this.partitamono = new Partita(monolocale);
 		
-		Labirinto bilocale = labirintoBuilder
-				.addStanzaIniziale("salotto")
-				.addStanzaVincente("cucina")
-				.addAdiacenza("salotto","cucina", "nord")
-				.addAdiacenza("cucina", "salotto", "sud")
-				.getLabirinto();
-		this.partitabi = new Partita(bilocale);
+//		Labirinto bilocale = labirintoBuilder
+//				.addStanzaIniziale("salotto")
+//				.addStanzaVincente("cucina")
+//				.addAdiacenza("salotto","cucina", Direzione.nord)
+//				.addAdiacenza("cucina", "salotto", Direzione.sud)
+//				.getLabirinto();
+//		this.partitabi = new Partita(bilocale);
 		
-		this.io = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		this.io = new IOConsole(scanner);
 		this.comandoposa = new ComandoPosa();
 		this.attrezzo = new Attrezzo("attrezzo_qualunque",2);
 		this.comandoposa.setIO(this.io);

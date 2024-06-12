@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -61,13 +62,13 @@ public class StanzaTest {
 	
 	@Test
 	public void testGetStanzaAdiacente_Inesistente() {
-		assertNull(this.stanza.getStanzaAdiacente("nord"));
+		assertNull(this.stanza.getStanzaAdiacente(Direzione.nord));
 	}
 	
 	@Test
 	public void testGetStanzaAdiacente_Presente() {
-		this.stanza.impostaStanzaAdiacente("sud", stanza_adiacente);
-		assertEquals(stanza_adiacente, this.stanza.getStanzaAdiacente("sud"));
+		this.stanza.impostaStanzaAdiacente(Direzione.sud, stanza_adiacente);
+		assertEquals(stanza_adiacente, this.stanza.getStanzaAdiacente(Direzione.sud));
 	}
 	
 }
